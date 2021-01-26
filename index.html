@@ -23,23 +23,23 @@
     <!-- Timeblocks go here -->
     <!-- hours on left, text field for task in middle column, save button on right -->
     <div class="row time-block">
-      <div class="col-1 hour"></div>
-      <textarea class="col-10 task past"></textarea>
+      <div class="col-1 hour hour-1"></div>
+      <textarea class="col-10 task task-1"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
     <div class="row time-block">
-      <div class="col-1 hour"></div>
-      <textarea class="col-10 task present"></textarea>
+      <div class="col-1 hour hour-2"></div>
+      <textarea class="col-10 task task-2"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
     <div class="row time-block">
-      <div class="col-1 hour"></div>
-      <textarea class="col-10 task future"></textarea>
+      <div class="col-1 hour hour-3"></div>
+      <textarea class="col-10 task task-3"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
     <div class="row time-block">
-      <div class="col-1 hour"></div>
-      <textarea class="col-10 task"></textarea>
+      <div class="col-1 hour hour-4"></div>
+      <textarea class="col-10 task task-4"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
   </div>
@@ -48,39 +48,62 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
     // today's date is shown at the top
-    var date = moment().format('LL');
+    var date = moment().format('LL, h:mm a');
     $("#currentDay").html(date);
 
-    // The hours of the day are listed in the right column
+    // $("#currentDay").text(moment().format('dddd MMMM Do YYYY, h:mm a'));
+
+    // set current time
+    var currentTime = moment();
+    console.log(currentTime);
+
+    // returns start of  current hour as currentTime
+    currentTime = currentTime.startOf("hour");
+    // Calculates the start of day + 9 to return 9 am
+    var startTime = moment().startOf('day').add(9, "hours");
+    console.log(startTime);
+
+    // add hours to time column
+    // 9 AM
+    var time1 = startTime.add(0, 'hours')
+    // set time format
+    time1 = time1.format('hh:mm A')
+    // display time in html
+    $('.hour-1').text(time1)
+    // 10 A<
+    var time2 = startTime.add(1, 'hours')
+    //set time format
+    time2 = time2.format('hh:mm A')
+    // display time in html
+    $('.hour-2').text(time2)
 
 
-    // current hour is red
-    var hour = moment().hour();
-    if ($(".hour") === hour) {
-      // add class "present"
-      $("<textarea>").addClass("present")
-    }
+    // // current hour is red
+    // var hour = moment().format('H')
+    // console.log(hour);
+    // if ($(".hour") === hour) {
+    //   // add class "present"
+    //   $("<textarea>").addClass("present")
+    // } else if ($(".hour") < hour) { // past hours are grey
+    //   // add class "present"
+    //   $("<textarea>").addClass("past")
+    // }
 
-    // past hours are grey
-    if ($(".hour") < hour) {
-      // add class "present"
-      $("<textarea>").addClass("past")
-    }
-
-    // future hours are green
-    if ($(".hour") > hour) {
-      // add class "present"
-      $("<textarea>").addClass("future")
-    }
+    // // future hours are green
+    // if ($(".hour") > hour) {
+    //   // add class "present"
+    //   $("<textarea>").addClass("future")
+    // }
 
 
-    // When I click in the center column, I can type in a task
-    $(".task")
+    // // When I click in the center column, I can type in a task
+    // $(".task")
 
-    // When I click save, the task is saved to storage
-    $(".saveBtn").on("click", function () {
-
-    })
+    // // When I click save, the task is saved to storage
+    // $(".saveBtn").on("click", function () {
+    //   var taskItem = $(".task")
+    //   console.log(taskItem);
+    // })
   </script>
 
 </body>
