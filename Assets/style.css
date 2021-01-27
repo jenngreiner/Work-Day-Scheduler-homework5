@@ -21,6 +21,12 @@ textarea{
   border-bottom: 10px solid black;
 }
 
+#currentDay {
+  border: 2px solid gold;
+  margin: 0 500px;
+  padding: 10px 0;
+}
+
 .description{
   white-space: pre-wrap;
 }
@@ -40,6 +46,7 @@ textarea{
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  padding: 30px 0;
 }
 
 .past {
