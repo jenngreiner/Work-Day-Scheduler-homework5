@@ -30,7 +30,7 @@
     <div class="row time-block">
       <div class="col-1 hour hour-2"></div>
       <textarea class="col-10 task task-2"></textarea>
-      <button class="col-1 saveBtn">Save</button>
+      <button class="col-1 saveBtn" id="saveBtn-2">Save</button>
     </div>
     <div class="row time-block">
       <div class="col-1 hour hour-3"></div>
@@ -75,6 +75,7 @@
     // today's date is shown at the top
     var date = moment().format('LL, h:mm a');
     $("#currentDay").html(date);
+    // document.getElementById('currentDay').append(date);
 
     // $("#currentDay").text(moment().format('dddd MMMM Do YYYY, h:mm a'));
 
@@ -83,9 +84,11 @@
     console.log(currentTime);
 
     // returns start of  current hour as currentTime
-    currentTime = currentTime.startOf("hour");
+    currentTime = currentTime.startOf('hour');
+    console.log('current time: ' + currentTime.format('LLLL'));
+
     // Calculates the start of day + 9 to return 9 am
-    const startTime = moment().startOf('day').add(9, "hours");
+    const startTime = moment().startOf('day').add(9, 'hour');
     console.log(startTime);
 
     // add hours to time column
@@ -135,7 +138,8 @@
       currentTime = currentTime.startOf('hour');
       time1 = moment().startOf('day').add(9, 'hours');
       // console.log("<---- I AM HERE ----->");
-      // console.log(currentTime);
+      console.log("time1: " + time1);
+      console.log("current time: " + currentTime);
       // console.log(time1);
       // if time block equals current time, add class present
       if (currentTime.isSame(time1)) {
@@ -165,7 +169,7 @@
         $(".task-2").addClass("future")
       }
       //11
-      time3 = time1.add(2, 'hours')
+      time3 = time2.add(1, 'hours')
       console.log(time3);
       // if time block equals current time, add class present
       if (currentTime.isSame(time3)) {
@@ -180,7 +184,7 @@
         $(".task-3").addClass("future")
       }
       //12
-      time4 = time1.add(3, 'hours')
+      time4 = time3.add(1, 'hours')
       console.log(time4);
       // if time block equals current time, add class present
       if (currentTime.isSame(time4)) {
@@ -195,7 +199,7 @@
         $(".task-4").addClass("future")
       }
       //1
-      time5 = time1.add(4, 'hours')
+      time5 = time4.add(1, 'hours')
       console.log(time5);
       // if time block equals current time, add class present
       if (currentTime.isSame(time5)) {
@@ -210,7 +214,7 @@
         $(".task-5").addClass("future")
       }
       //2
-      time6 = time1.add(5, 'hours')
+      time6 = time5.add(1, 'hours')
       console.log(time6);
       // if time block equals current time, add class present
       if (currentTime.isSame(time6)) {
@@ -225,7 +229,7 @@
         $(".task-6").addClass("future")
       }
       //3
-      time7 = time1.add(6, 'hours')
+      time7 = time6.add(1, 'hours')
       console.log(time7);
       // if time block equals current time, add class present
       if (currentTime.isSame(time7)) {
@@ -240,7 +244,7 @@
         $(".task-7").addClass("future")
       }
       //4
-      time8 = time1.add(7, 'hours')
+      time8 = time7.add(1, 'hours')
       console.log(time8);
       // if time block equals current time, add class present
       if (currentTime.isSame(time8)) {
@@ -255,7 +259,7 @@
         $(".task-8").addClass("future")
       }
       //5
-      time9 = time1.add(2, 'hours')
+      time9 = time8.add(1, 'hours')
       console.log(time9);
       // if time block equals current time, add class present
       if (currentTime.isSame(time9)) {
@@ -272,6 +276,16 @@
     }
 
     testTime()
+    try {
+      $('.saveBtn').on('click', function () {
+        event.preventDefault();
+        var task = $('.task').data('hour');
+        localStorage.setItem('task', task);
+        console.log(task);
+      });
+    } catch (error) {
+      console.log('Error: ' + error);
+    }
 
 
     // // text entered in .task is saved to localStorage when I click save buttone
