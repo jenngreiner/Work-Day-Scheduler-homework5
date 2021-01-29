@@ -22,47 +22,47 @@
   <div class="container">
     <!-- Timeblocks go here -->
     <!-- hours on left, text field for task in middle column, save button on right -->
-    <div class="row time-block">
+    <div class="row time-block" id="9">
       <div class="col-1 hour hour-1"></div>
       <textarea class="col-10 task task-1"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="10">
       <div class="col-1 hour hour-2"></div>
       <textarea class="col-10 task task-2"></textarea>
       <button class="col-1 saveBtn" id="saveBtn-2">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="11">
       <div class="col-1 hour hour-3"></div>
       <textarea class="col-10 task task-3"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="12">
       <div class="col-1 hour hour-4"></div>
       <textarea class="col-10 task task-4"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="13">
       <div class="col-1 hour hour-5"></div>
       <textarea class="col-10 task task-5"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="14">
       <div class="col-1 hour hour-6"></div>
       <textarea class="col-10 task task-6"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="15">
       <div class="col-1 hour hour-7"></div>
       <textarea class="col-10 task task-7"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="16">
       <div class="col-1 hour hour-8"></div>
       <textarea class="col-10 task task-8"></textarea>
       <button class="col-1 saveBtn">Save</button>
     </div>
-    <div class="row time-block">
+    <div class="row time-block" id="17">
       <div class="col-1 hour hour-9"></div>
       <textarea class="col-10 task task-9"></textarea>
       <button class="col-1 saveBtn">Save</button>
@@ -275,19 +275,24 @@
       }
     }
 
-    testTime()
-    try {
-      $('.saveBtn').on('click', function () {
-        event.preventDefault();
-        var task = $('.task').data('hour');
-        localStorage.setItem('task', task);
-        console.log(task);
-      });
-    } catch (error) {
-      console.log('Error: ' + error);
-    }
+    testTime();
 
+    var saveBtn = $('.saveBtn');
+    saveBtn.on('click', function () {
+      var time = $(this).parent().attr('id');
+      var value = $(this).siblings('.task').val();
+      localStorage.setItem(time, value)
+    })
 
+    $("#9 .task").val(localStorage.getItem("9"))
+    $("#10 .task").val(localStorage.getItem("10"))
+    $("#11 .task").val(localStorage.getItem("11"))
+    $("#12 .task").val(localStorage.getItem("12"))
+    $("#13 .task").val(localStorage.getItem("13"))
+    $("#14 .task").val(localStorage.getItem("14"))
+    $("#15 .task").val(localStorage.getItem("15"))
+    $("#16 .task").val(localStorage.getItem("16"))
+    $("#17 .task").val(localStorage.getItem("17"))
     // // text entered in .task is saved to localStorage when I click save buttone
     // $('.saveBtn').on('click', function () {
     //   // save contents of $('.task')
