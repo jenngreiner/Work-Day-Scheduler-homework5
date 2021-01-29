@@ -279,33 +279,31 @@
 
     var saveBtn = $('.saveBtn');
     saveBtn.on('click', function () {
-      var time = $(this).parent().attr('id');
-      var value = $(this).siblings('.task').val();
-      localStorage.setItem(time, value)
+      // var time = $(this).parent().attr('id');
+      // var value = $(this).siblings('.task').val();
+      // localStorage.setItem(time, value)
+      var localTimeEvents = {},
+        lsTimeEvents;
+      if (localStorage.getItem('timeEvents')) {
+        lsTimeEvents = JSON.parse(localStorage.getItem('timeEvents'));
+        lsTimeEvents[$(this).parent().attr('id')] = $(this).siblings('.task').val();
+        localStorage.setItem('timeEvents', JSON.stringify(lsTimeEvents));
+      } else {
+        localTimeEvents[$(this).parent().attr('id')] = $(this).siblings('.task').val();
+        localStorage.setItem('timeEvents', JSON.stringify(localTimeEvents));
+      }
+
     })
-
-    $("#9 .task").val(localStorage.getItem("9"))
-    $("#10 .task").val(localStorage.getItem("10"))
-    $("#11 .task").val(localStorage.getItem("11"))
-    $("#12 .task").val(localStorage.getItem("12"))
-    $("#13 .task").val(localStorage.getItem("13"))
-    $("#14 .task").val(localStorage.getItem("14"))
-    $("#15 .task").val(localStorage.getItem("15"))
-    $("#16 .task").val(localStorage.getItem("16"))
-    $("#17 .task").val(localStorage.getItem("17"))
-    // // text entered in .task is saved to localStorage when I click save buttone
-    // $('.saveBtn').on('click', function () {
-    //   // save contents of $('.task')
-    //   localStorage.setItem('toDo', JSON.stringify($('.task').value)
-    //   console.log($('.task').value;
-    // })
-    // // $(".task")
-
-    // // When I click save, the task is saved to storage
-    // $(".saveBtn").on("click", function () {
-    //   var taskItem = $(".task")
-    //   console.log(taskItem);
-    // })
+    // get localstorage, look for the object. 
+    // if there is not object, create a new one
+    // if there is an object, JSONparse it to turn it back into an object
+    var displayTimeEvents;
+    if (localStorage.getItem('timeEvents')) {
+      displayTimeEvents = JSON.parse(localStorage.getItem('timeEvents'));
+      for (x in displayTimeEvents) {
+        $('#' + x).find('.task').val(displayTimeEvents[x]);
+      }
+    }
   </script>
 
 </body>
